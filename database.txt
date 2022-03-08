@@ -1,0 +1,68 @@
+hospital
+** users
+- id
+- name
+- email
+- password
+- phone
+
+** departments
+- id
+- name_en
+- name_ar
+
+** doctors
+- id
+- user_id
+- department_id
+- image
+- bio
+
+** patients
+- id
+- user_id
+- dob
+- insurance
+
+** avilable_times
+- id
+- doctor_id
+- date_from
+- date_to
+- status
+- price
+
+** appoinments
+- id
+- patinet_id
+- doctor_id
+- avilable_time_id
+- price
+
+** payments
+- id
+- appoinment_id
+- status
+- price
+- transaction_id
+
+** posts
+- id
+- user_id
+- department_id
+- title
+- content
+- image
+
+** comments
+- id
+- user_id
+- post_id
+- comment
+
+** rates
+- id
+- doctor_id
+- patient_id
+- rate
+- comment
