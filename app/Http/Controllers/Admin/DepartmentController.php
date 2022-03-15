@@ -16,7 +16,7 @@ class DepartmentController extends Controller
     public function index()
     {
         // $departments = Department::latest()->paginate(2);
-        $departments = Department::orderBy('id', 'desc')->paginate(2);
+        $departments = Department::orderBy('id', 'desc')->paginate(5);
         // dd($departments);
         return view('admin.departments.index', compact('departments'));
     }
@@ -50,6 +50,8 @@ class DepartmentController extends Controller
             ]);
             $i++;
         }
+
+        return redirect()->route('admin.departments.index')->with('msg', 'Department added successfully')->with('type', 'success');
     }
 
     /**
@@ -83,7 +85,12 @@ class DepartmentController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        Department::find($id)->update([
+            'name_en' => $request->name_en,
+            'name_ar' => $request->name_ar,
+        ]);
+
+        return redirect()->route('admin.departments.index')->with('msg', 'Department updated Successfully')->with('type', 'info');
     }
 
     /**
@@ -94,6 +101,10 @@ class DepartmentController extends Controller
      */
     public function destroy($id)
     {
-        //
+        // return $id;
+        Department::destroy($id);
+        // Department::find($id)->delete();
+
+        return redirect()->route('admin.departments.index')->with('msg', 'Department Deleted Successfully')->with('type', 'danger');
     }
 }

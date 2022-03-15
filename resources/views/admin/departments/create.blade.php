@@ -79,8 +79,8 @@ button.btn_remove:hover {
 
     $('#add_row').click(function() {
         $('.item-wrapper').append(row);
-        $('#count').html($('.item').length)
-        if($('.item').length == 5) {
+        $('#count').html($('.item:not(".deleted")').length)
+        if($('.item:not(".deleted")').length == 5) {
             $('#add_row').prop('disabled', 'true');
             $('#add_row').removeClass('btn-primary');
             $('#add_row').addClass('btn-danger');
@@ -94,6 +94,9 @@ button.btn_remove:hover {
     // })
     $('body').on('click', '.btn_remove', function(e) {
         e.preventDefault();
+
+        // console.log($(this).parent().find('input').val());
+
         $(this).parent().fadeOut();
         $(this).parent().addClass('deleted');
         $(this).parent().find('input').prop('disabled', 'true');
@@ -104,8 +107,8 @@ button.btn_remove:hover {
             $('#add_row').removeClass('btn-danger');
             $('#add_row').addClass('btn-primary');
             $('#count').removeClass('text-danger');
-
         }
+
     });
 </script>
 

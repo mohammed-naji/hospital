@@ -1,0 +1,17 @@
+Laravel
+PHP Framework
+
+xampp
+composer
+git
+nodejs
+
+c://wamp64/www
+
+MVC
+M => Models => Database
+V => Views => Website 'Front End'
+C => Controller => Connect between M & V
+
+mohammed.com
+mohammed.com/about
