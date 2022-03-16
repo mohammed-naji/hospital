@@ -18,4 +18,9 @@ class AdminController extends Controller
         // dd(Auth::user());
         return view('admin.index');
     }
+
+    public function change_password()
+    {
+        return view('admin.change_password');
+    }
 }
