@@ -13,16 +13,18 @@ class WelcomeDoctorMail extends Mailable
 
     public $id;
     public $name;
+    public $token;
 
     /**
      * Create a new message instance.
      *
      * @return void
      */
-    public function __construct($id, $name)
+    public function __construct($id, $name, $token)
     {
         $this->id = $id;
         $this->name = $name;
+        $this->token = $token;
     }
 
     /**

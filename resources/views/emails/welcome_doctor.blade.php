@@ -6,12 +6,13 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Welcome</title>
 </head>
-<body style="background: #eee">
+<body style="background: #eee; font-family: arial">
     <div style="width:600px;margin: 100px auto;background:#fff;padding:50px 30px">
         <h1>Welcome {{ $name }}</h1>
         <p>There is an new account has been created for you in our website and you can change your password by clicking this button</p>
 
         <br>
+        <h3 style="text-align: center">Your verification code is : <span style="color: red">{{ $token }}</span></h3>
         <br>
         <div style="text-align: center">
             <a style="display: inline-block; padding: 10px 30px;background: #4e73df; color: #fff; border-radius: 3px;text-decoration: none" href="{{ route('verify_doctor', $id) }}">Change Password</a>

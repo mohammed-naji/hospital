@@ -65,8 +65,24 @@
               Add New Password
             </h1>
           </header>
-                <form method="POST" class="sign-up__form form" action="{{ route('login') }}">
+                <form method="POST" class="sign-up__form form" action="{{ route('change_password_submit', $id) }}">
                     @csrf
+
+                    <div class="form__row">
+                        <div class="input">
+                          <div class="input__container">
+                            <input id="token" type="text" class="input__field" name="token" >
+                            <label class="input__label" for="token">
+                              Token
+                            </label>
+                          </div>
+                          @error('token')
+                    <span style="font-size: 14px; color:red">
+                        {{ $message }}
+                    </span>
+                @enderror
+                        </div>
+                      </div>
 
             <div class="form__row">
               <div class="input">

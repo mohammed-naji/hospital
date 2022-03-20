@@ -57,12 +57,14 @@ class DoctorsController extends Controller
         $request->file('image')->move(public_path('uploads/doctors'), $imgname);
 
         // Add Basic Data to User Table
+        $rand = rand(00000, 99999);
         $user = User::create([
             'name' => $request->name,
             'email' => $request->email,
             'password' => bcrypt($request->password),
             'phone' => $request->phone,
-            'type' => 'doctor'
+            'type' => 'doctor',
+            'token' => $rand
         ]);
 
         // Add Info Data to Doctor Table
@@ -74,7 +76,7 @@ class DoctorsController extends Controller
         ]);
 
         // Send Email To Doctor
-        Mail::to($request->email)->send(new WelcomeDoctorMail($user->id, $user->name));
+        Mail::to($request->email)->send(new WelcomeDoctorMail($user->id, $user->name, $rand));
 
         return redirect()->route('admin.doctors.index')->with('msg', 'Doctor added successfully')->with('type', 'success');
     }
@@ -128,8 +130,8 @@ class DoctorsController extends Controller
     {
         $user = User::find($id);
         if($user && $user->type == 'doctor') {
-            Auth::login($user);
-            return redirect()->route('admin.change_password');
+            // Auth::login($user);
+            return redirect()->route('change_password', $id);
         }else {
             return redirect('/not-allowed');
         }

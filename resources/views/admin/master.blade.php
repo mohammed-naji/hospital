@@ -20,6 +20,29 @@
     <!-- Custom styles for this template-->
     <link href="{{ asset('adminstyle/css/sb-admin-2.min.css') }}" rel="stylesheet">
 
+    @if (App::currentLocale() == 'ar')
+    <style>
+        body {
+            direction: rtl;
+            text-align: right;
+        }
+        .ml-auto, .mx-auto {
+            margin-right: auto!important;
+            margin-left: unset !important;
+        }
+        ul {
+            padding: 0!important;
+        }
+        .sidebar .nav-item .nav-link {
+            text-align: right
+        }
+        .sidebar .nav-item .nav-link[data-toggle=collapse]::after {
+            float: left;
+            transform: rotate(180deg)
+        }
+    </style>
+    @endif
+
     @yield('styles')
 </head>
 
@@ -44,8 +67,34 @@
                         <i class="fa fa-bars"></i>
                     </button>
 
+
+
+
+
                     <!-- Topbar Navbar -->
                     <ul class="navbar-nav ml-auto">
+
+                        <li class="nav-item dropdown no-arrow">
+                            <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button"
+                                data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                <i class="fas fa-globe mx-2"></i> Languages
+                            </a>
+                            <!-- Dropdown - User Information -->
+                            <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in"
+                                aria-labelledby="userDropdown">
+
+                                @foreach(LaravelLocalization::getSupportedLocales() as $localeCode => $properties)
+                                        <a class="dropdown-item" rel="alternate" hreflang="{{ $localeCode }}" href="{{ LaravelLocalization::getLocalizedURL($localeCode, null, [], true) }}">
+
+                                            <img width="20" height="15" src="{{ asset('images/'.$properties['flag']) }}" alt="">
+
+                                            {{ $properties['native'] }}
+                                        </a>
+                                @endforeach
+
+                            </div>
+                        </li>
+
 
                         <!-- Nav Item - Alerts -->
                         <li class="nav-item dropdown no-arrow mx-1">
@@ -97,6 +146,8 @@
                                 <a class="dropdown-item text-center small text-gray-500" href="#">Show All Alerts</a>
                             </div>
                         </li>
+
+
 
 
                         <div class="topbar-divider d-none d-sm-block"></div>

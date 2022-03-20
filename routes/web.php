@@ -3,12 +3,15 @@
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Admin\AdminController;
-use App\Http\Controllers\Admin\DepartmentController;
 use App\Http\Controllers\Admin\DoctorsController;
+use App\Http\Controllers\Admin\DepartmentController;
+use Mcamara\LaravelLocalization\Facades\LaravelLocalization;
+
+Route::group(['prefix' => LaravelLocalization::setLocale()], function()
+{
 
 Route::prefix('admin')->name('admin.')->middleware('auth', 'check_type')->group(function() {
     Route::get('/', [AdminController::class, 'index'])->name('index');
-    Route::get('/change-password', [AdminController::class, 'change_password'])->name('change_password');
 
     // admin.departments.index
     // admin.departments.create
@@ -22,6 +25,9 @@ Route::prefix('admin')->name('admin.')->middleware('auth', 'check_type')->group(
 
 });
 
+
+Route::get('/change-password/{id}', [AdminController::class, 'change_password'])->name('change_password');
+Route::post('/change-password/{id}', [AdminController::class, 'change_password_submit'])->name('change_password_submit');
 
 Route::get('/', function() {
 
@@ -39,3 +45,4 @@ Route::get('verify-doctor/{id}', [DoctorsController::class, 'verify_doctor'])->n
 
 Route::view('/testtttttt', 'emails.welcome_doctor', ['id' => 5, 'name' => 'ddd']);
 
+});
