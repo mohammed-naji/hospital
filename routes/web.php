@@ -5,6 +5,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Admin\AdminController;
 use App\Http\Controllers\Admin\DoctorsController;
 use App\Http\Controllers\Admin\DepartmentController;
+use App\Http\Controllers\PaymentController;
 use Mcamara\LaravelLocalization\Facades\LaravelLocalization;
 
 Route::group(['prefix' => LaravelLocalization::setLocale()], function()
@@ -46,3 +47,9 @@ Route::get('verify-doctor/{id}', [DoctorsController::class, 'verify_doctor'])->n
 Route::view('/testtttttt', 'emails.welcome_doctor', ['id' => 5, 'name' => 'ddd']);
 
 });
+
+
+Route::get('payment/paypal', [PaymentController::class, 'paypal'])->name('paypal');
+
+Route::get('payment/hyperpay', [PaymentController::class, 'hyperpay'])->name('hyperpay');
+Route::get('payment/hyperpay/result', [PaymentController::class, 'hyperpay_result'])->name('hyperpay.result');
