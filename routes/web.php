@@ -5,6 +5,8 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Admin\AdminController;
 use App\Http\Controllers\Admin\DoctorsController;
 use App\Http\Controllers\Admin\DepartmentController;
+use App\Http\Controllers\APIController;
+use App\Http\Controllers\NotificationController;
 use App\Http\Controllers\PaymentController;
 use Mcamara\LaravelLocalization\Facades\LaravelLocalization;
 
@@ -53,3 +55,14 @@ Route::get('payment/paypal', [PaymentController::class, 'paypal'])->name('paypal
 
 Route::get('payment/hyperpay', [PaymentController::class, 'hyperpay'])->name('hyperpay');
 Route::get('payment/hyperpay/result', [PaymentController::class, 'hyperpay_result'])->name('hyperpay.result');
+
+
+
+Route::get('send-notification', [NotificationController::class, 'index']);
+Route::get('user-notification', [NotificationController::class, 'user_notification']);
+
+Route::get('read-notification/{id}', [NotificationController::class, 'read'])->name('read');
+
+Route::get('read-all-notification', [NotificationController::class, 'read_all'])->name('read_all');
+
+Route::get('list-posts', [APIController::class, 'index']);
