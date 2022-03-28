@@ -10,4 +10,10 @@ class APIController extends Controller
     {
         return view('api.index');
     }
+
+    public function weather()
+    {
+        return view('api.weather');
+    }
+
 }

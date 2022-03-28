@@ -66,3 +66,4 @@ Route::get('read-notification/{id}', [NotificationController::class, 'read'])->n
 Route::get('read-all-notification', [NotificationController::class, 'read_all'])->name('read_all');
 
 Route::get('list-posts', [APIController::class, 'index']);
+Route::get('weather', [APIController::class, 'weather']);

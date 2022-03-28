@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -8,6 +9,7 @@
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <title>Document</title>
 </head>
+
 <body>
 
     <div class="container my-5">
@@ -23,12 +25,14 @@
         $('#load-data').click(function() {
             $('#load-data').prop('disabled', true);
             // get all posts from url
+
             $.ajax({
                 type: 'get',
                 url: 'https://jsonplaceholder.typicode.com/posts',
                 success: function(res) {
                     // console.log(res);
                     res.forEach(el => {
+                        // res.forEach(function(el) {
                         console.log(el);
 
                         var card = `<div class="card mb-4">
@@ -51,4 +55,5 @@
     </script>
 
 </body>
+
 </html>
