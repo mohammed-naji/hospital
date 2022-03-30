@@ -25,6 +25,12 @@ class AuthServiceProvider extends ServiceProvider
     {
         $this->registerPolicies();
 
-        //
+        Gate::define('view-dapartments', function($user) {
+            return $user->role->permissions()->where('code', 'view-departments')->exists();
+        });
+
+        Gate::define('update-department', function($user) {
+            return $user->role->permissions()->where('code', 'update-department')->exists();
+        });
     }
 }

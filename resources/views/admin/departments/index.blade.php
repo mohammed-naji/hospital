@@ -37,11 +37,10 @@
         @forelse ($departments as $dep)
         @php
             $name = 'name_'.App()->currentLocale();
-
         @endphp
             <tr id="row_{{ $dep->id }}">
                 <td>{{ $dep->id }}</td>
-                <td class="name_en">{{ $dep->$name }}</td>
+                <td class="name_en"><a href="{{ route('admin.departments.show', $dep->slug) }}">{{ $dep->$name }}</a></td>
                 {{-- <td class="name_ar">{{ $dep->name_ar }}</td> --}}
                 <td>
                     {{-- {{ $dep->created_at->format('d F, Y') }} --}}
@@ -52,7 +51,10 @@
                     {{ $dep->updated_at->diffForHumans() }}
                 </td>
                 <td>
+                    @can('update-department')
                     <a data-id="{{ $dep->id }}" data-toggle="modal" data-target="#editModal" class="btn btn-sm btn-primary btn_edit">{{ __('admin.Edit') }}</a>
+                    @endcan
+
                     <form class="d-inline" action="{{ route('admin.departments.destroy', $dep->id) }}" method="POST">
                         @csrf
                         @method('delete')

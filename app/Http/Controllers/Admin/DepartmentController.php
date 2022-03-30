@@ -2,9 +2,12 @@
 
 namespace App\Http\Controllers\Admin;
 
-use App\Http\Controllers\Controller;
+
 use App\Models\Department;
+use Illuminate\Support\Str;
 use Illuminate\Http\Request;
+use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Gate;
 
 class DepartmentController extends Controller
 {
@@ -15,6 +18,7 @@ class DepartmentController extends Controller
      */
     public function index()
     {
+        Gate::authorize('view-dapartments');
         // $departments = Department::latest()->paginate(2);
         $departments = Department::orderBy('id', 'desc')->paginate(5);
         // dd($departments);
@@ -47,6 +51,7 @@ class DepartmentController extends Controller
             Department::create([
                 'name_en' => $names_en[$i],
                 'name_ar' => $names_ar[$i],
+                'slug' => Str::slug($names_en[$i])
             ]);
             $i++;
         }
@@ -60,9 +65,9 @@ class DepartmentController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show($slug)
     {
-        //
+        return Department::where('slug', $slug)->first();
     }
 
     /**
@@ -85,6 +90,7 @@ class DepartmentController extends Controller
      */
     public function update(Request $request, $id)
     {
+        Gate::authorize('update-department');
         Department::find($id)->update([
             'name_en' => $request->name_en,
             'name_ar' => $request->name_ar,

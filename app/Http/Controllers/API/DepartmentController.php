@@ -15,11 +15,32 @@ class DepartmentController extends Controller
      */
     public function index()
     {
-        return response()->json([
-            'status' => 200,
-            'message' => 'Success',
-            'data' => Department::all()
-        ], 200);
+        // request()->appkey
+        if(request()->has('appkey')) {
+
+            if(request()->appkey == 123) {
+                return response()->json([
+                    'status' => 200,
+                    'message' => 'Success',
+                    'data' => Department::all()
+                ], 200);
+            }else {
+                return response()->json([
+                    'status' => 404,
+                    'message' => 'Wrong appkey',
+                    'data' => ''
+                ], 404);
+            }
+
+
+        }else {
+            return response()->json([
+                'status' => 404,
+                'message' => 'Please provide appkey',
+                'data' => ''
+            ], 404);
+        }
+
 
     }
 
